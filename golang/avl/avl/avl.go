@@ -48,12 +48,34 @@ func Insert(val int, n *Node) *Node {
 	return n
 }
 
+// singleRotateLeft performs a rotation between n and its left child
+// NOTE: call singleRotateLeft only if n has a left child
 func singleRotateLeft(n *Node) *Node {
-	return n
+	t := &Node{}
+
+	t = n.Left
+	n.Left = t.Right
+	t.Right = n
+
+	n.Height = max(height(n.Left), height(n.Right)) + 1
+	t.Height = max(height(t.Left), n.Height) + 1
+
+	return t
 }
 
+// singleRotateRight performs a rotation between n and its right child
+// NOTE: call singleRotateRight only if n has a right child
 func singleRotateRight(n *Node) *Node {
-	return n
+	t := &Node{}
+
+	t = n.Right
+	n.Right = t.Left
+	t.Left = n
+
+	n.Height = max(height(n.Left), height(n.Right)) + 1
+	t.Height = max(height(t.Right), n.Height) + 1
+
+	return t
 }
 
 func doubleRotateLeft(n *Node) *Node {
