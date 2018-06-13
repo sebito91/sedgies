@@ -2,13 +2,14 @@
 
 package avl
 
+import "fmt"
+
 // Node is the default instance of our struct
 type Node struct {
-	Value   int
-	Height  int
-	Left    *Node
-	Right   *Node
-	Sibling *Node
+	Value  int
+	Height int
+	Left   *Node
+	Right  *Node
 }
 
 // New instantiates a new instance of an AVL node
@@ -78,12 +79,16 @@ func singleRotateRight(n *Node) *Node {
 	return t
 }
 
+// doubleRotateLeft handles the AVL left-right double rotation
 func doubleRotateLeft(n *Node) *Node {
-	return n
+	n.Left = singleRotateRight(n.Left)
+	return singleRotateLeft(n)
 }
 
+// doubleRotateRight handles the AVL right-left double rotation
 func doubleRotateRight(n *Node) *Node {
-	return n
+	n.Right = singleRotateLeft(n.Right)
+	return singleRotateRight(n)
 }
 
 // height is a helper that returns the current AVL distance
@@ -101,4 +106,23 @@ func max(l, r int) int {
 		return l
 	}
 	return r
+}
+
+// DumpAVL will dump out the contents of the tree
+func (n *Node) DumpAVL() {
+	if n == nil {
+		return
+	}
+
+	fmt.Printf("%d\n", n.Value)
+	if n.Left != nil {
+		fmt.Printf("(L:%d)\n", n.Left.Value)
+	}
+	if n.Right != nil {
+		fmt.Printf("(R:%d)\n", n.Right.Value)
+	}
+	fmt.Printf("(h: %d)\n", n.Height)
+
+	n.Left.DumpAVL()
+	n.Right.DumpAVL()
 }

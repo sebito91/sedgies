@@ -7,6 +7,15 @@ import (
 )
 
 func main() {
-	avl := avl.New()
-	fmt.Printf("DEBUG -- avl is: %+v\n", avl)
+	a := avl.New()
+	fmt.Printf("DEBUG -- avl is: %+v\n", a)
+	a.DumpAVL()
+
+	a = avl.Insert(10, a)
+	fmt.Printf("DEBUG -- avl is: %+v\n", a)
+	a.DumpAVL()
+
+	a = avl.Insert(3, a)
+	fmt.Printf("DEBUG -- avl is: %+v\n", a)
+	a.DumpAVL()
 }
