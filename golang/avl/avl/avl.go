@@ -13,8 +13,8 @@ type Node struct {
 }
 
 // New instantiates a new instance of an AVL node
-func New() *Node {
-	return &Node{}
+func New() (n *Node) {
+	return n
 }
 
 // Insert the provided value into the AVL
